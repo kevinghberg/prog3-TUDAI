@@ -4,14 +4,17 @@ package com.prog3.clase1;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
-        }
-    }
+        MySimpleLinkedList lista = new MySimpleLinkedList();
+
+        lista.insertFront(20);
+        lista.insertFront(10);
+        lista.insertFront(1);
+
+
+        System.out.println("la cantidad de nodos en la lista es de:" + " " +lista.size());
+        lista.extractFront();
+        System.out.println("El valor del elemento en la posicion de la lista que pediste es:"+lista.get(1));
+        System.out.println(lista.size());
+}
 }

@@ -3,44 +3,48 @@ package com.prog3.clase1;
 public class MySimpleLinkedList<T> {
 
     private Node<T> first;
-    private int size;
+    private int contador;
 
     public MySimpleLinkedList() {
         this.first = null;
-        this.size=0;
+        this.contador = 0;
     }
 
     public void insertFront(T info) {
-        Node<T> tmp = new Node<T>(info,null);
+        Node<T> tmp = new Node<T>(info, null);
         tmp.setNext(this.first);
         this.first = tmp;
-        this.size++;
+        this.contador++;
     }
 
     public T extractFront() {
-        this.size--;
+        if(!this.isEmpty()){
+            Node<T> aux = this.first;
+            this.first = first.getNext();
+            contador--;
+            return aux.getInfo();
+        }
         return null;
     }
 
     public boolean isEmpty() {
-        // TODO
+
         return false;
     }
 
     public T get(int index) {
-        // TODO
-        return null;
+        Node<T> aux = this.first;
+        int contador = 0;
+        while (contador != index) {
+            contador++;
+            aux = aux.getNext();
+        }
+        return aux.getInfo();
     }
 
-//complejidad O(1)
+    //complejidad O(1)
     public int size() {
-        Node<T> cursor=this.first;
-        int contador=0;
-        while(cursor !=null){
-            contador++;
-            cursor = cursor.getNext();
-        }
-        return size;
+        return contador;
     }
 
     @Override
