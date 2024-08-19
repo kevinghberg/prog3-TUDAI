@@ -1,6 +1,6 @@
 package com.prog3.clase1;
 
-public class Node<T> {
+public class Node<T>{
     private T info;
     private Node<T> next;
 
@@ -29,4 +29,5 @@ public class Node<T> {
     public void setNext(Node<T> next) {
         this.next = next;
     }
+
 }

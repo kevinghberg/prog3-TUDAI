@@ -6,15 +6,38 @@ public class Main {
     public static void main(String[] args) {
 
         MySimpleLinkedList lista = new MySimpleLinkedList();
-
-        lista.insertFront(20);
-        lista.insertFront(10);
-        lista.insertFront(1);
+        MySimpleLinkedList lista2 = new MySimpleLinkedList();
 
 
-        System.out.println("la cantidad de nodos en la lista es de:" + " " +lista.size());
-        lista.extractFront();
-        System.out.println("El valor del elemento en la posicion de la lista que pediste es:"+lista.get(1));
-        System.out.println(lista.size());
+
+        lista.insertLast2(1);
+        lista.insertLast2(20);
+        lista.insertLast2(10);
+        lista.insertLast2(102);
+        lista.insertLast2(102);
+
+
+        lista2.insertLast2(1);
+        lista2.insertLast2(1);
+        lista2.insertLast2(20);
+        lista2.insertLast2(10);
+        lista2.insertLast2(107);
+
+
+
+        //System.out.println("la cantidad de nodos en la lista es de:" + " " +lista.size());
+        //lista.extractFront();
+       // System.out.println("El valor del elemento en la posicion de la lista que pediste es:"+lista.get(1));
+       // System.out.println(lista.size());
+       System.out.println(lista.indexOf(10));
+
+        System.out.println(lista);
+        System.out.println(lista2);
+
+        MySimpleLinkedList listaElementosComun = new MySimpleLinkedList();
+        listaElementosComun=listaElementosComun.unirListasElementosComun(lista,lista2);
+
+        System.out.println(listaElementosComun);
+
 }
 }
