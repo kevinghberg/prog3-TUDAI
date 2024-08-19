@@ -1,6 +1,8 @@
 package com.prog3.clase1;
 
-public class MySimpleLinkedList<T> {
+import java.util.Iterator;
+
+public class MySimpleLinkedList<T> implements Iterator<T>{
 
     private Node<T> first;
     private int contador;
@@ -71,39 +73,38 @@ public class MySimpleLinkedList<T> {
     }
 
 
-
     // metodo para encontrar el indice de un nodo y retornar su valor
     public int indexOf(T info) {
         Node<T> aux = this.first;
         int contador = 0;
-        while (aux != null && !aux.getInfo().equals(info)) {     // mientras haya un siguiente nodo en la lista y el valor del nodo sea dif al que buscamos. usa equals porqe compara 2 objetos
+        while (aux != null && !aux.getInfo().equals(info)) {                // mientras haya un siguiente nodo en la lista y el valor del nodo sea dif al que buscamos. usa equals porqe compara 2 objetos
             contador++;                                                     // aumenta el contador en 1
             aux = aux.getNext();                                            // el nodo apunta al siguiente en cada iteracion
         }
-        if (aux !=null && aux.getInfo().equals(info)) {                                    // verifica si el nodo actual (aux) contiene el valor buscado (info).
+        if (aux != null && aux.getInfo().equals(info)) {                                    // verifica si el nodo actual (aux) contiene el valor buscado (info).
             return contador;                                                // retorna el contador ( este representa el indice del nodo en la lista)
         } else
             return -1;                                                      // retorna -1 en caso de que el elemento no esta en la lista
     }
 
-    public MySimpleLinkedList<T> unirListasElementosComun(MySimpleLinkedList<T> lista1, MySimpleLinkedList<T> lista2) {
-        MySimpleLinkedList<T> newList = new MySimpleLinkedList<T>();                                  //creamos una nueva lista
-        Node<T> l1 = lista1.first;                                                                    //creamos un nodo que apunta al primero de la lista 1
+    public MySimpleLinkedList<T> unirListasElementosComun(MySimpleLinkedList<T> lista2) {
+        MySimpleLinkedList<T> newList = new MySimpleLinkedList<T>();
 
-        while (l1 != null) {                                                                          //mientras que el nodo en lista1 no sea null
-            Node<T> j2 = lista2.first;                                                                //creamos un nodo que apunta al primero de la lista 2, (este lo creamos en este while por si no hay elementos en lista 1)
-            while (j2 != null) {                                                                      //mientras que el nodo j2 de lista2 no sea null
-                if (l1.getInfo().equals(j2.getInfo()) && newList.indexOf(l1.getInfo()) == -1) {       //si el valor del nodo de la lista 1 es igual al valor del nodo de la lista 2 y usamos indexOf para verificar si el valor ya esta en la nueva lista
-                    newList.insertFront(l1.getInfo());                                                //insertamos el valor del nodo de la lista 1 en la nueva lista
+        Node<T> aux1 = this.first;
+        while (aux1 != null) {
+            Node<T> aux2 = lista2.first;
+            while (aux2 !=null) {
+                if (aux1.getInfo().equals(aux2.getInfo()) && newList.indexOf(aux1.getInfo()) == -1) {
+                    newList.insertFront(aux1.getInfo());
                 }
-                j2 = j2.getNext();                                                                    //el nodo de la lista 2 apunta al siguiente
+                aux2 = aux2.getNext();
             }
-            l1 = l1.getNext();                                                                        //el nodo de la lista 1 apunta al siguiente
+            aux1 = aux1.getNext();
         }
-        return newList;                                                                               //retornamos la nueva lista
+        return newList;
     }
 
-    public MySimpleLinkedList ordenarListaMenorAMayor(MySimpleLinkedList<T> lista){
+    public MySimpleLinkedList ordenarListaMenorAMayor(MySimpleLinkedList<T> lista) {
 
         return null;
     }
@@ -115,10 +116,27 @@ public class MySimpleLinkedList<T> {
         while (aux != null) {
             todo = todo + aux.getInfo();
             aux = aux.getNext();
-            if(aux != null){
+            if (aux != null) {
                 todo = todo + ",";
             }
         }
-        return "["+todo+"]";
+        return "[" + todo + "]";
+    }
+
+    @Override
+    public boolean hasNext() {
+        return this.first != null;
+    }
+
+    @Override
+    public T next() {
+        T info = this.first.getInfo();
+        this.first = this.first.getNext();
+        return info;
+    }
+
+    @Override
+    public void remove() {
+        Iterator.super.remove();
     }
 }
