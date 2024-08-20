@@ -2,7 +2,7 @@ package com.prog3.clase1;
 
 import java.util.Iterator;
 
-public class MySimpleLinkedList<T> implements Iterator<T>{
+public class MySimpleLinkedList<T> implements Iterator<T> {
 
     private Node<T> first;
     private int contador;
@@ -93,13 +93,32 @@ public class MySimpleLinkedList<T> implements Iterator<T>{
         Node<T> aux1 = this.first;
         while (aux1 != null) {
             Node<T> aux2 = lista2.first;
-            while (aux2 !=null) {
+            while (aux2 != null) {
                 if (aux1.getInfo().equals(aux2.getInfo()) && newList.indexOf(aux1.getInfo()) == -1) {
                     newList.insertFront(aux1.getInfo());
                 }
                 aux2 = aux2.getNext();
             }
             aux1 = aux1.getNext();
+        }
+        return newList;
+    }
+
+    public MySimpleLinkedList<T> unirListasConElementosDistintos(MySimpleLinkedList<T> lista2) {
+        MySimpleLinkedList<T> newList = new MySimpleLinkedList<T>();
+        Node<T> aux1 = this.first;
+        while (aux1 != null) {
+            if (newList.indexOf(aux1.getInfo()) == -1 && lista2.indexOf(aux1.getInfo()) == -1) {
+                newList.insertFront(aux1.getInfo());
+            }
+            aux1 = aux1.getNext();
+        }
+        Node<T> aux2 = lista2.first;
+        while (aux2 != null) {
+            if (newList.indexOf(aux2.getInfo()) == -1 && this.indexOf(aux2.getInfo()) == -1) {
+                newList.insertFront(aux2.getInfo());
+            }
+            aux2 = aux2.getNext();
         }
         return newList;
     }

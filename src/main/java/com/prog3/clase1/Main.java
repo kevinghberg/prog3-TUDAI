@@ -13,14 +13,21 @@ public class Main {
         lista.insertLast2(10);
         lista.insertLast2(102);
         lista.insertLast2(102);
+        lista.insertLast2(30);
+        lista.insertLast2(455);
+        lista.insertLast2(786);
+
 
 
         lista2.insertLast2(1);
         lista2.insertLast2(1);
         lista2.insertLast2(20);
+        lista2.insertLast2(786);
         lista2.insertLast2(10);
         lista2.insertLast2(107);
-        lista2.insertLast2(102);
+
+        lista2.insertLast2(455);
+
 
 
         //System.out.println("la cantidad de nodos en la lista es de:" + " " +lista.size());
@@ -50,6 +57,13 @@ public class Main {
             System.out.println(lista3.next());
         }
 
+        // construir lista con elementos de lista 1 pero sin los de la lista2 (iguales)
+
+        MySimpleLinkedList<T> listaElementosDistintos = new MySimpleLinkedList<T>();
+
+        listaElementosDistintos=lista.unirListasConElementosDistintos(lista2);
+
+        System.out.println(listaElementosDistintos);
 
     }
 }
