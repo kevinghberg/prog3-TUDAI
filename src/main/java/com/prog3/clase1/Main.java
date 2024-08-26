@@ -61,7 +61,7 @@ public class Main {
 
         MySimpleLinkedList<T> listaElementosDistintos = new MySimpleLinkedList<T>();
 
-        listaElementosDistintos=lista.unirListasConElementosDistintos(lista2);
+        //listaElementosDistintos=lista.unirListasConElementosDistintos(lista2);
 
         System.out.println(listaElementosDistintos);
 
