@@ -97,7 +97,7 @@ public class Arbol {
             return;
         }
         imprimirEnOrden(nodo.getLeft());
-        System.out.println(nodo.getKey());
+        System.out.print(nodo.getKey() + " ");
         imprimirEnOrden(nodo.getRight());
     }
 
@@ -113,9 +113,10 @@ public class Arbol {
         if (nodo == null) {
             return;
         }
-        System.out.println(nodo.getKey());
-        imprimirEnOrden(nodo.getLeft());
-        imprimirEnOrden(nodo.getRight());
+        System.out.print(nodo.getKey() + " ");
+        imprimirPreOrder(nodo.getLeft());
+        imprimirPreOrder(nodo.getRight());
+
     }
 
     public void imprimirPostOrden() {
@@ -128,7 +129,7 @@ public class Arbol {
         }
         imprimirPostOrden(nodo.getLeft());
         imprimirPostOrden(nodo.getRight());
-        System.out.println(nodo.getKey());
+        System.out.print(nodo.getKey() + " ");
     }
 
     public List<Integer> getRamaMasLarga() {
@@ -207,5 +208,120 @@ public class Arbol {
         }
         return lista;
     }
-}
+///
 
+    public boolean delete(int key) {
+        if (raiz != null) {
+            this.raiz = delete(key, this.raiz);
+            return true;
+        }
+        return false;
+    }
+
+    private Nodo delete(int key, Nodo nodo) {
+        if (nodo == null) {
+            return null;
+        }
+        //Recorre
+        if (key < nodo.getKey()) {
+            nodo.setLeft(delete(key, nodo.getLeft()));
+        } else if (key > nodo.getKey()) {
+            nodo.setRight(delete(key, nodo.getRight()));
+        } else {
+            ///nodo sin hijos
+            if (nodo.getLeft() == null && nodo.getRight() == null) {
+                return null;
+            }
+
+            /// nodo con un solo hijo
+            else if (nodo.getLeft() == null) {
+                return nodo.getRight();
+            } else if (nodo.getRight() == null) {
+                return nodo.getLeft();
+            }
+            //Nodo con dos hijos
+            else {
+                nodo.setKey(getMinElem(nodo.getRight()));
+                nodo.setRight(delete(nodo.getKey(), nodo.getRight()));
+            }
+        }
+        return nodo;
+    }
+
+    private int getMinElem(Nodo nodo) {
+        if (nodo.getLeft() == null)
+            return nodo.getKey();
+        return getMinElem(nodo.getLeft());
+    }
+
+
+    public int sumarNodos() {
+        return sumarNodos(this.raiz);
+    }
+
+    private int sumarNodos(Nodo nodo) {
+        if (nodo == null) {
+            return 0;
+        }
+        if ((nodo.getLeft() == null && nodo.getRight() == null)) {
+            return 0;
+        }
+        return nodo.getKey() + sumarNodos(nodo.getLeft()) + sumarNodos(nodo.getRight());
+    }
+
+    public ArrayList<Integer> hojasMayores(int valor) {
+        if (this.raiz != null) {
+            ArrayList<Integer> hojas = new ArrayList<>();
+            hojasMayores(this.raiz, valor, hojas);
+            return hojas;
+        }
+        return new ArrayList<>();
+    }
+
+    private ArrayList<Integer> hojasMayores(Nodo nodo, int valor, ArrayList<Integer> lista) {
+        if (nodo.getLeft() == null && nodo.getRight() == null && nodo.getKey() > valor) {
+            lista.add(nodo.getKey());//si valor menor a la hoja , aniado a lista
+        } else {
+            if (nodo.getLeft() != null) { //recorro por izquierdaa
+                hojasMayores(nodo.getLeft(), valor, lista);
+            }
+            if (nodo.getRight() != null) { //recorro pro derecha
+                hojasMayores(nodo.getRight(), valor, lista);
+            }
+        }
+        return lista;
+    }
+
+
+    public int llenarNodosInternos(){
+       return  llenarNodosInternos(this.raiz);
+    }
+
+    private int llenarNodosInternos(Nodo nodo) {
+        if (nodo == null) { // nodo nulo = 0
+            return 0;
+        }
+        if (nodo.getLeft() == null && nodo.getRight() == null) {
+            return nodo.getKey();                                    // si es hoja retorno el valor para usarlo
+        }
+        // recursividad para valores lado izq y valores lado der
+        int valorIzq = llenarNodosInternos(nodo.getLeft());
+        System.out.println(valorIzq);
+        int valorDer = llenarNodosInternos(nodo.getRight());
+        System.out.println(valorDer);
+
+        nodo.setKey(valorDer-valorIzq); // key hijo derecho menos key hijo izquierdo al nodo actual
+
+        return nodo.getKey();
+
+    }
+
+
+    public Nodo getRaiz() {
+        return raiz;
+    }
+
+    public void setRaiz(Nodo raiz) {
+        this.raiz = raiz;
+    }
+}

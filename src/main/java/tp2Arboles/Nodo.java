@@ -35,4 +35,13 @@ public class Nodo{
     public int getKey(){
         return this.key;
     }
+
+    @Override
+    public String toString() {
+        return "Nodo{" +
+                "key=" + key +
+                ", left=" + left +
+                ", right=" + right +
+                '}';
+    }
 }
