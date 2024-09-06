@@ -5,11 +5,21 @@ public class Nodo{
     private int key;
     private Nodo left;
     private Nodo right;
+    private char letra;
+
 
     public Nodo(int key){
         this.key=key;
         this.left=null;
         this.right=null;
+        this.letra=letra;
+    }
+
+    public Nodo(char letra){
+        this.key=this.getKey();
+        this.left=null;
+        this.right=null;
+        this.letra=letra;
     }
 
     public Nodo getRight(){
@@ -34,6 +44,15 @@ public class Nodo{
     }
     public int getKey(){
         return this.key;
+    }
+
+
+    public char getLetra() {
+        return letra;
+    }
+
+    public void setLetra(char letra) {
+        this.letra = letra;
     }
 
     @Override

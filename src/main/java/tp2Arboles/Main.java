@@ -1,6 +1,8 @@
 package tp2Arboles;
 
 
+import java.sql.SQLOutput;
+
 public class Main {
     public static void main(String[] args) {
 
@@ -47,11 +49,37 @@ public class Main {
         raiz.getLeft().setLeft(new Nodo(3));
         raiz.getRight().setLeft(new Nodo(5));
         raiz.getRight().setRight(new Nodo(2));
-        ar2.imprimirEnOrden();
+      //  ar2.imprimirEnOrden();
 
-        ar2.llenarNodosInternos();
+        //ar2.llenarNodosInternos();
 
-        ar2.imprimirEnOrden();
+       // ar2.imprimirEnOrden();
 
-    }
-}
+
+
+
+
+        Arbol ar3 = new Arbol();
+
+        Nodo letra= new Nodo('M');
+
+        letra.setLeft(new Nodo('A'));
+        letra.setRight(new Nodo('I'));
+
+        letra.getLeft().setLeft(new Nodo('L'));
+        letra.getLeft().setRight(new Nodo('N'));
+
+        letra.getLeft().getRight().setLeft(new Nodo('A'));
+        letra.getLeft().getRight().setRight(new Nodo('O'));
+
+        letra.getRight().setLeft(new Nodo('S'));
+        letra.getRight().setRight(new Nodo('O'));
+
+        letra.getRight().getLeft().setRight(new Nodo('A'));
+
+        ar3.setRaiz(letra);
+
+        for(String palabra : ar3.buscarPalabras(2)){
+            System.out.println(palabra);
+        }
+}}

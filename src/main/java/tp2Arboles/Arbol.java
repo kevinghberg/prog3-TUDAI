@@ -293,8 +293,8 @@ public class Arbol {
     }
 
 
-    public int llenarNodosInternos(){
-       return  llenarNodosInternos(this.raiz);
+    public int llenarNodosInternos() {
+        return llenarNodosInternos(this.raiz);
     }
 
     private int llenarNodosInternos(Nodo nodo) {
@@ -310,7 +310,7 @@ public class Arbol {
         int valorDer = llenarNodosInternos(nodo.getRight());
         System.out.println(valorDer);
 
-        nodo.setKey(valorDer-valorIzq); // key hijo derecho menos key hijo izquierdo al nodo actual
+        nodo.setKey(valorDer - valorIzq); // key hijo derecho menos key hijo izquierdo al nodo actual
 
         return nodo.getKey();
 
@@ -324,4 +324,44 @@ public class Arbol {
     public void setRaiz(Nodo raiz) {
         this.raiz = raiz;
     }
+
+
+
+
+    public ArrayList<String> buscarPalabras(int i) {
+       ArrayList<String> palabras = new ArrayList<>(); // LISTA QE DEVULEVO
+       buscarPalabras(this.raiz, "",palabras,i); // METODO ENCAPSULADO
+       return palabras;
+    }
+
+    private void buscarPalabras(Nodo nodo, String palabraActual, ArrayList<String> palabras, int N) {
+        if (nodo == null) { // si es null no retorno nada
+            return;
+        }
+        palabraActual += nodo.getLetra(); // acumulando cada caracter
+
+        if (nodo.getLeft() == null && nodo.getRight() == null){ // si es hoja
+            if (contarVocales(palabraActual) == N) {  // si es hoja y la palabra que se conformo es igual a la cantidad de vocales que pidio el usuario
+                palabras.add(palabraActual);  // aniado a una lista
+            }
+        }
+        buscarPalabras(nodo.getLeft(), palabraActual,palabras,N); // recursivo por izquierda con cada nodo , llevando la palabra qe se va armando
+        buscarPalabras(nodo.getRight(),palabraActual,palabras,N); // recursivo por der ''                                          ''
+    }
+
+    private int contarVocales(String palabraActual) { // metodo para contar las vocales de la palabra y poder compararla con la entrada N
+        int contador = 0;
+        for (char c : palabraActual.toCharArray()) { // convierto la palabra en un arreglo de caracteres tipo char
+            if (esVocal(c)) {  // si ese char es vocal
+                contador++; // aumento en 1
+            }
+        }
+        return contador;
+    }
+
+    private boolean esVocal(char c) { // si es vocal
+        return c == 'A' || c == 'E' || c == 'I' || c == 'O' || c == 'U';
+    }
+
+
 }
